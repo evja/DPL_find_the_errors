@@ -16,9 +16,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:id])
+    @post = Post.new(post_params) # Changed (params[:id]) to (post_params)
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to post_path(@post), notice: 'Post was successfully created.' #changed @path to posts_path(@post)
     else
       render :new
     end
@@ -26,14 +26,14 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post was successfully updated.'
+      redirect_to post_path(@post), notice: 'Post was successfully updated.' #changed @path to posts_path(@post)
     else
       render :edit
     end
   end
 
   def destroy
-    @post
+    @post.delete #added Delete to
     redirect_to posts_url, notice: 'Post was successfully destroyed.'
   end
 

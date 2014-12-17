@@ -1,6 +1,6 @@
 <h1>Editing task</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @task %> |
+<!-- changes @task to task_path on Show link -->
+<%= link_to 'Show', task_path %>
 <%= link_to 'Back', tasks_path %>

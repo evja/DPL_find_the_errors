@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @task = Task.all
+    @tasks = Task.all #changes @task to plural Tasks
   end
 
   def show
@@ -16,9 +16,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = Task.new(task_params) #changes Task.new to Task.create
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to task_path(@task), notice: 'Task was successfully created.' # added (@task) to task_path
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @tasks, notice: 'Task was successfully updated.'
+      redirect_to task_path(@task), notice: 'Task was successfully updated.' #changed (redirected_to (@task) to (tasks_path(@task))
     else
       render :edit
     end
@@ -38,11 +38,11 @@ class TasksController < ApplicationController
   end
 
   private
-    def set_tasks
+    def set_task  #removed (s) from the end of set_task
       @task = Task.find(params[:id])
     end
 
     def task_params
-      params.require(:task).permit(:priority)
+      params.require(:task).permit(:priority, :description) #added (:description) to permit list
     end
 end
